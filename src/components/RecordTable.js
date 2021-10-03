@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Contents from './Contents';
 
 class RecordTable extends Component {
     constructor() {
@@ -54,6 +55,7 @@ class RecordTable extends Component {
                                     <TableCell>Insert Name</TableCell>
                                     <TableCell>Insert DOB</TableCell>
                                 </TableRow>
+                    <Contents people={this.people} />
                     </TableBody>
                 </Table>
             </Paper>
