@@ -40,7 +40,20 @@ class RecordTable extends Component {
         ];
     }
 
+    sortBy() {
+        const list = Array.from(this.people);
+        if (this.props.sortBy === "name") {
+            list.sort((a,b) => String(a.name || '').localeCompare(String(b.name || '')));
+        } else {
+            list.sort();
+        }
+        
+        return list;
+    }
+
     render() {
+        console.log(this.props.sortBy);
+
         return (
             <Paper className="width">
                 <Table>
@@ -55,12 +68,16 @@ class RecordTable extends Component {
                                     <TableCell>Insert Name</TableCell>
                                     <TableCell>Insert DOB</TableCell>
                                 </TableRow>
-                    <Contents people={this.people} />
+                    <Contents list={this.sortBy()} sortBy={this.props.sortBy} />
                     </TableBody>
                 </Table>
             </Paper>
         );
     }
 }
+
+RecordTable.propTypes = {
+    sortBy: PropTypes.string
+};
 
 export default RecordTable;

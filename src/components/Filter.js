@@ -3,13 +3,15 @@ import {PropTypes} from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 
 class Filter extends Component {
-
+    onChange = (event) => {
+        this.props.onChange(event ? event.target.name : '');
+    }
     render() {
         return (
         <div className="checkboxes">
-            <Checkbox/>
+            <Checkbox name="name" onSelect={this.onChange} />
             <label>Name</label>
-            <Checkbox/>
+            <Checkbox name="age" onSelect={this.onChange} />
             <label>Age</label>
         </div>
         );
