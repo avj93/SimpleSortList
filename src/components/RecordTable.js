@@ -45,7 +45,14 @@ class RecordTable extends Component {
         if (this.props.sortBy === "name") {
             list.sort((a,b) => String(a.name || '').localeCompare(String(b.name || '')));
         } else {
-            list.sort();
+            list.sort((a,b) => {
+                const firstDateItems = a.dob.split('/');
+                const firstDate = new Date(firstDateItems[2], firstDateItems[1], firstDateItems[0])
+                const secondDateItems = b.dob.split('/');
+                const secondDate = new Date(secondDateItems[2], firstDateItems[1], firstDateItems[0])
+
+                return firstDate - secondDate;
+            });
         }
         
         return list;
