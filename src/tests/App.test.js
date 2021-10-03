@@ -12,6 +12,12 @@ import renderer from 'react-test-renderer';
 configure({ adapter: new Adapter() });
 
 describe('BirthdayRecords <App/>', () => {
+  const event = {
+    target: {
+      name: ''
+    }
+  };
+
   it('complete app renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
@@ -24,15 +30,18 @@ describe('BirthdayRecords <App/>', () => {
 
   it('check filter by age', () => {
     const wrapper = mount(<App />);
-    wrapper.find(Filter).instance().onChange('age');
+    event.target.name = 'age';
+    wrapper.find(Filter).instance().onChange(event);
     expect(wrapper.find(RecordTable).text()).toEqual('NameDate of BirthAlexander Alfred02/09/1891Janice Shroyer12/01/1982Peter Parker01/16/1992Cecilia Olsson09/16/1992Deborah T. Decker10/31/1999Jimmy Shergil12/12/2001Veronica Mize11/29/2011Ralph White11/30/2011');
   });
 
   it('check filter by age and then filter by name', () => {
   	const wrapper = mount(<App />);
-    wrapper.find(Filter).instance().onChange('age');
+    event.target.name = 'age';
+    wrapper.find(Filter).instance().onChange(event);
     expect(wrapper.find(RecordTable).text()).toEqual('NameDate of BirthAlexander Alfred02/09/1891Janice Shroyer12/01/1982Peter Parker01/16/1992Cecilia Olsson09/16/1992Deborah T. Decker10/31/1999Jimmy Shergil12/12/2001Veronica Mize11/29/2011Ralph White11/30/2011');
-  	wrapper.find(Filter).instance().onChange('name');
+    event.target.name = 'name';
+    wrapper.find(Filter).instance().onChange(event);
   	expect(wrapper.find(RecordTable).text()).toEqual('NameDate of BirthAlexander Alfred02/09/1891Cecilia Olsson09/16/1992Deborah T. Decker10/31/1999Janice Shroyer12/01/1982Jimmy Shergil12/12/2001Peter Parker01/16/1992Ralph White11/30/2011Veronica Mize11/29/2011');
   });
 

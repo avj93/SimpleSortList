@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Contents from './Contents';
 
 class RecordTable extends Component {
     constructor() {
@@ -39,6 +40,24 @@ class RecordTable extends Component {
         ];
     }
 
+    sortBy() {
+        const list = Array.from(this.people);
+        if (this.props.sortBy === "name") {
+            list.sort((a,b) => String(a.name || '').localeCompare(String(b.name || '')));
+        } else {
+            list.sort((a,b) => {
+                const firstDateItems = a.dob.split('/');
+                const firstDate = new Date(firstDateItems[2], firstDateItems[1], firstDateItems[0])
+                const secondDateItems = b.dob.split('/');
+                const secondDate = new Date(secondDateItems[2], firstDateItems[1], firstDateItems[0])
+
+                return firstDate - secondDate;
+            });
+        }
+        
+        return list;
+    }
+
     render() {
         return (
             <Paper className="width">
@@ -50,15 +69,16 @@ class RecordTable extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                                <TableRow>
-                                    <TableCell>Insert Name</TableCell>
-                                    <TableCell>Insert DOB</TableCell>
-                                </TableRow>
+                    <Contents list={this.sortBy()} sortBy={this.props.sortBy} />
                     </TableBody>
                 </Table>
             </Paper>
         );
     }
 }
+
+RecordTable.propTypes = {
+    sortBy: PropTypes.string
+};
 
 export default RecordTable;
