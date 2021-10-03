@@ -69,10 +69,6 @@ class RecordTable extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                                <TableRow>
-                                    <TableCell>Insert Name</TableCell>
-                                    <TableCell>Insert DOB</TableCell>
-                                </TableRow>
                     <Contents list={this.sortBy()} sortBy={this.props.sortBy} />
                     </TableBody>
                 </Table>
