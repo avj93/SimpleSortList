@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <center><h1>Birthday Records</h1></center>
-        <Filter onChange={this.onSortBySelection}></Filter>
+        <Filter onChange={this.onSortBySelection} sortBy={this.state.sortBy}></Filter>
         <RecordTable sortBy={this.state.sortBy}></RecordTable>
       </div>
     );

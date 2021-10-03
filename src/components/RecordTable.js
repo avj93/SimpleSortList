@@ -52,8 +52,6 @@ class RecordTable extends Component {
     }
 
     render() {
-        console.log(this.props.sortBy);
-
         return (
             <Paper className="width">
                 <Table>
